@@ -1,0 +1,122 @@
+generated: '2026-09-10'
+method: probed
+source: >-
+  Live unauthenticated GET of the RFC 8615 named-path list against every host this record
+  knows for Fluor Corporation — the registrable domain and www, the newsroom and investor
+  hosts named in common[], the careers host, and the supplier/client portal host.
+note: >-
+  Fluor Corporation is an engineering, procurement and construction firm with no developer
+  program and no API host. There is no baseURL and no OpenAPI servers[] block to probe, so
+  the host list below is the corporate web estate. One path returned a real document:
+  careers.fluor.com serves RFC 8414 OAuth 2.0 Authorization Server Metadata. That host is a
+  CNAME to fluor.eightfold.ai — the Eightfold recruiting platform running under Fluor's own
+  DNS — so the authorization server is vendor-operated even though the document declares
+  issuer https://careers.fluor.com. Recorded as served, with the operator named, so a later
+  run does not mistake it for a Fluor-published API discovery surface.
+hosts:
+  - host: www.fluor.com
+    role: corporate website (registrable domain, www)
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+  - host: fluor.com
+    role: corporate website (apex)
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+  - host: careers.fluor.com
+    role: careers site (CNAME to fluor.eightfold.ai — Eightfold recruiting platform)
+    documents:
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        file: fluor-oauth-authorization-server.json
+        content_type: application/json
+        note: >-
+          Real RFC 8414 document. issuer https://careers.fluor.com, authorization_endpoint
+          /oauth/authorize, token_endpoint /oauth/token, authorization_code + refresh_token
+          grants, PKCE S256, client_secret_basic/client_secret_post/private_key_jwt. Operated
+          by Eightfold under Fluor's hostname; it authorizes the careers experience, not a
+          Fluor API.
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+  - host: newsroom.fluor.com
+    role: press room (Q4 Inc. investor-communications platform)
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        note: >-
+          Not a document. The Q4 platform answers 200 with the HTML body "Invalid key" for
+          every /.well-known/* path — a soft-404 catch-all. Treated as a miss.
+      - path: /.well-known/openid-configuration
+        status: 200
+        note: soft-404 ("Invalid key" HTML) — treated as a miss.
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        note: soft-404 ("Invalid key" HTML) — treated as a miss.
+      - path: /.well-known/api-catalog
+        status: 200
+        note: soft-404 ("Invalid key" HTML) — treated as a miss.
+      - path: /.well-known/ai-plugin.json
+        status: 200
+        note: soft-404 ("Invalid key" HTML) — treated as a miss.
+  - host: investor.fluor.com
+    role: investor relations (Q4 Inc. platform)
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        note: soft-404 ("Invalid key" HTML) — treated as a miss.
+      - path: /.well-known/openid-configuration
+        status: 200
+        note: soft-404 ("Invalid key" HTML) — treated as a miss.
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        note: soft-404 ("Invalid key" HTML) — treated as a miss.
+      - path: /.well-known/api-catalog
+        status: 200
+        note: soft-404 ("Invalid key" HTML) — treated as a miss.
+      - path: /.well-known/ai-plugin.json
+        status: 200
+        note: soft-404 ("Invalid key" HTML) — treated as a miss.
+  - host: portal.fluor.com
+    role: client/supplier portal (Microsoft Power Apps portal, login-gated)
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        note: Azure returns a static marker file, not RFC 9116 content.
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 500
+        note: '{"error":"server_error"} — the endpoint exists but errors anonymously.'
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
