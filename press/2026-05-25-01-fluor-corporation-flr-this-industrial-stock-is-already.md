@@ -1,7 +1,9 @@
 ---
 title: 'Fluor Corporation (FLR): This Industrial Stock Is Already ...'
 url: https://finance.yahoo.com/news/fluor-corporation-flr-industrial-stock-114846750.html
-date: '2026-05-25'
+published: ''
+date_basis: harvested
+harvested: '2026-05-25'
 query: '"Fluor" press release artificial intelligence'
 position: 1
 source: serpapi-google
