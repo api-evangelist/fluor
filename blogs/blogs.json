@@ -2,21 +2,21 @@
   "repo": "fluor",
   "feeds": [
     {
-      "source": "https://www.linkedin.com/company/fluor",
-      "feed_url": "https://www.linkedin.com/company/fluor",
-      "title": "",
-      "saved": 0,
-      "method": "none"
-    },
-    {
       "source": "https://newsroom.fluor.com/rss/pressrelease.aspx",
       "feed_url": "https://newsroom.fluor.com/rss/pressrelease.aspx",
       "title": "",
       "saved": 0,
       "method": "feed"
+    },
+    {
+      "source": "https://www.linkedin.com/company/fluor",
+      "feed_url": "https://www.linkedin.com/company/fluor",
+      "title": "",
+      "saved": 0,
+      "method": "none"
     }
   ],
-  "fetched": "2026-10-03T12:30:02Z",
+  "fetched": "2026-10-10T13:15:00Z",
   "post_count": 25,
   "feed_nature": "vendor-blog",
   "feed_nature_basis": "path_blog",
